@@ -1,0 +1,2 @@
+# Module com.hislightgamestudio.sirbouncealot.GwtDefinition
+# RPC service class, partial path of RPC policy file
