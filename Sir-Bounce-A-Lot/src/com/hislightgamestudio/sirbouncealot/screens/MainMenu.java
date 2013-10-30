@@ -5,6 +5,8 @@ public class MainMenu extends AbstractScreen {
 	@Override
 	public void render(float delta) {
 		super.render(delta);
+		
+		tweenManager.update(delta);
 	}
 
 	@Override
