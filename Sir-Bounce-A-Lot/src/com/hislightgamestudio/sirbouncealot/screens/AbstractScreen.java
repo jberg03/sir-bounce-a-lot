@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public abstract class AbstractScreen implements Screen{
 	protected SpriteBatch batch;
-	protected TweenManager tweenManager;
 	protected Stage stage;
 	protected TextureAtlas atlas;
 	protected Skin menuSkin;
@@ -21,7 +20,6 @@ public abstract class AbstractScreen implements Screen{
 	
 	AbstractScreen(){
 		batch = new SpriteBatch();
-		tweenManager = new TweenManager();
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
 		atlas = new TextureAtlas("spritesheets/atlas.pack");
 		menuSkin = new Skin(Gdx.files.internal("uiskin/menuSkin.json"), atlas);
@@ -42,9 +40,9 @@ public abstract class AbstractScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		//stage.setViewport(width, height, false);
+		stage.setViewport(width, height, false);
 		
-		//table.invalidateHierarchy();
+		table.invalidateHierarchy();
 	}
 
 	@Override
@@ -59,14 +57,10 @@ public abstract class AbstractScreen implements Screen{
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

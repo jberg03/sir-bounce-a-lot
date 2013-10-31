@@ -16,19 +16,19 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class SettingsScreen extends AbstractScreen {
-	
+
 	public static FileHandle levelDirectory(){
-		String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("levelDirectory").trim();
+		String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("leveldirectory").trim();
 		if(prefsDir != null && !prefsDir.equals(""))
 			return Gdx.files.absolute(prefsDir);
 		else
 			return Gdx.files.absolute(Gdx.files.external(SirBounceALot.TITLE + "/levels").path());
 	}
-	
+
 	public static boolean vSync(){
-		return Gdx.app.getPreferences(SirBounceALot.TITLE).getBoolean("vSync");
+		return Gdx.app.getPreferences(levelDirectory().toString()).getBoolean("vSync");
 	}
-	
+
 	@Override
 	public void render(float delta) {
 		super.render(delta);
@@ -43,64 +43,63 @@ public class SettingsScreen extends AbstractScreen {
 	public void show() {		
 		final CheckBox vSyncCheckBox = new CheckBox("vSync", menuSkin);
 		vSyncCheckBox.setChecked(vSync());
-		
+
 		final TextField levelDirInput = new TextField(levelDirectory().path(), menuSkin);
 		levelDirInput.setMessageText("level directory");
-		
-		final TextButton back = new TextButton("Back", menuSkin, "small");
+
+		final TextButton back = new TextButton("BACK", menuSkin, "small");
 		back.pad(10f);
-		
+
 		ClickListener buttonHandler = new ClickListener() {
 
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                    // event.getListenerActor() returns the source of the event, e.g. a button that was clicked
-                    if(event.getListenerActor() == vSyncCheckBox) {
-                            // save vSync
-                            Gdx.app.getPreferences(SirBounceALot.TITLE).putBoolean("vSync", vSyncCheckBox.isChecked());
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				// event.getListenerActor() returns the source of the event, e.g. a button that was clicked
+				if(event.getListenerActor() == vSyncCheckBox) {
+					// save vSync
+					Gdx.app.getPreferences(levelDirectory().toString()).putBoolean("vSync", vSyncCheckBox.isChecked());
 
-                            // set vSync
-                            Gdx.graphics.setVSync(vSync());
+					Gdx.app.log(SirBounceALot.TITLE, "vSync " + (vSync() ? "enabled" : "disabled"));
 
-                            Gdx.app.log(SirBounceALot.TITLE, "vSync " + (vSync() ? "enabled" : "disabled"));
-                    } else if(event.getListenerActor() == back) {
-                            // save level directory
-                            String actualLevelDirectory = levelDirInput.getText().trim().equals("") ? Gdx.files.getExternalStoragePath() + SirBounceALot.TITLE + "/levels" : levelDirInput.getText().trim(); // shortened form of an if-statement: [boolean] ? [if true] : [else] // String#trim() removes spaces on both sides of the string
-                            Gdx.app.getPreferences(SirBounceALot.TITLE).putString("leveldirectory", actualLevelDirectory);
+				} else if(event.getListenerActor() == back) {
+					// save level directory
+					String actualLevelDirectory = levelDirInput.getText().trim().equals("") ? Gdx.files.getExternalStoragePath() 
+													+ SirBounceALot.TITLE + "/levels" : levelDirInput.getText().trim(); 
+					Gdx.app.getPreferences(SirBounceALot.TITLE).putString("leveldirectory", actualLevelDirectory);
 
-                            // save the settings to preferences file (Preferences#flush() writes the preferences in memory to the file)
-                            Gdx.app.getPreferences(SirBounceALot.TITLE).flush();
+					// save the settings to preferences file (Preferences#flush() writes the preferences in memory to the file)
+					Gdx.app.getPreferences(SirBounceALot.TITLE).flush();
 
-                            Gdx.app.log(SirBounceALot.TITLE, "settings saved");
+					Gdx.app.log(SirBounceALot.TITLE, "settings saved");
 
-                            stage.addAction(sequence(moveTo(0, stage.getHeight(), .5f), run(new Runnable() {
+					stage.addAction(sequence(moveTo(0, stage.getHeight(), .5f), run(new Runnable() {
 
-                                    @Override
-                                    public void run() {
-                                            ((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());
-                                    }
-                            })));
-                    }
-            }
-    };
+						@Override
+						public void run() {
+							((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+						}
+					})));
+				}
+			}
+		};
 
-		
+
 		vSyncCheckBox.addListener(buttonHandler);
-		
+
 		back.addListener(buttonHandler);
-				
+
 		//putting it all together
 		table.add(new Label("SETTINGS", menuSkin, "big")).spaceBottom(50).colspan(3).expandX().row();
-        table.add();
-        table.add("level directory");
-        table.add().row();
-        table.add(vSyncCheckBox).top().expandY();
-        table.add(levelDirInput).top().fillX();
-        table.add(back).bottom().right();
+		table.add();
+		table.add("level directory");
+		table.add().row();
+		table.add(vSyncCheckBox).top().expandY();
+		table.add(levelDirInput).top().fillX();
+		table.add(back).bottom().right();
 
-        stage.addActor(table);
+		stage.addActor(table);
 
-        stage.addAction(sequence(moveTo(0, stage.getHeight()), moveTo(0, 0, .5f))); // coming in from top animation
+		stage.addAction(sequence(moveTo(0, stage.getHeight()), moveTo(0, 0, .5f))); // coming in from top animation
 	}
 
 
@@ -111,12 +110,12 @@ public class SettingsScreen extends AbstractScreen {
 
 	@Override
 	public void pause() {
-		
+
 	}
 
 	@Override
 	public void resume() {
-		
+
 	}
 
 	@Override

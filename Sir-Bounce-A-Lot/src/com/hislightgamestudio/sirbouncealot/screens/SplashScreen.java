@@ -1,28 +1,26 @@
 package com.hislightgamestudio.sirbouncealot.screens;
 
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeIn;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 
-import com.hislightgamestudio.sirbouncealot.tween.*;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class SplashScreen extends AbstractScreen{
-	private Sprite splash;
+	private Image splash;
 	private Texture splashTexture;
 	
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 		
-		batch.begin();
-		splash.draw(batch);
-		batch.end();
-		
-		tweenManager.update(delta);
+		//tweenManager.update(delta);
 	}
 
 	@Override
@@ -31,21 +29,24 @@ public class SplashScreen extends AbstractScreen{
 
 	@Override
 	public void show() {
+		//set preferences
+		Gdx.graphics.setVSync(SettingsScreen.vSync());
+		
 		splashTexture = new Texture("data/His Light Game Studio Logo(2).jpg");
-		splash = new Sprite(splashTexture);
+		splash = new Image(splashTexture);
 		splash.setX(Gdx.graphics.getWidth() / 2 - splashTexture.getWidth() / 2);
 		splash.setY(Gdx.graphics.getHeight() / 2 - splashTexture.getHeight() / 2);
-	
-		//tweenManager = new TweenManager();
-		Tween.registerAccessor(Sprite.class, new Fader());
-		Tween.set(splash, Fader.ALPHA).target(0).start(tweenManager);
-		Tween.to(splash, Fader.ALPHA, 2).target(1).repeatYoyo(1, 2).setCallback(new TweenCallback(){
+		
+		stage.addActor(splash);
+		
+		splash.addAction(sequence(alpha(0), fadeIn(1.5f), delay(1.5f), fadeOut(1.5f), run(new Runnable(){
 
 			@Override
-			public void onEvent(int type, BaseTween<?> source) {
-				((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+			public void run() {
+				((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenu());				
 			}
-		}).start(tweenManager);
+			
+		})));
 	}
 
 	@Override
@@ -66,7 +67,6 @@ public class SplashScreen extends AbstractScreen{
 	@Override
 	public void dispose() {
 		super.dispose();
-		splash.getTexture().dispose();
 	}
 
 }
