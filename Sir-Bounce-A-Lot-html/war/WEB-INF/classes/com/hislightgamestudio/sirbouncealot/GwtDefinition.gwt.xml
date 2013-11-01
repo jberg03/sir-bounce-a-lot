@@ -3,6 +3,5 @@
     <entry-point class="com.hislightgamestudio.sirbouncealot.client.GwtLauncher"/>
     <set-configuration-property name="gdx.assetpath" value="../Sir-Bounce-A-Lot-android/assets"/>
     <inherits name="SirBounceALot"/>
-    <inherits name="aurelienribon.tweenengine"/>
     <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt"/>
 </module>
