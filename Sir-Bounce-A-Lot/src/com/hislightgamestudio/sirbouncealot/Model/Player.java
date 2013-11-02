@@ -47,7 +47,12 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	public void Update(){
 		body.applyForceToCenter(velocity, true);
 	}
-
+	@Override
+	public boolean shouldCollide(Fixture fixtureA, Fixture fixtureB) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 	@Override
 	public void beginContact(Contact contact) {
 		// TODO Auto-generated method stub
@@ -72,11 +77,7 @@ public class Player extends InputController implements ContactFilter, ContactLis
 		
 	}
 
-	@Override
-	public boolean shouldCollide(Fixture fixtureA, Fixture fixtureB) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	
 	
 }
