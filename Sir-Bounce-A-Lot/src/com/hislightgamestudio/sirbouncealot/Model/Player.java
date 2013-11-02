@@ -21,6 +21,7 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	public final float width, height;
 	private float movementForce = 500;
 	private Vector2 velocity = new Vector2();
+	private float jumpPower = 45;
 	
 	public Player(World world, float x, float y, float width){
 		this.width = width;
@@ -58,25 +59,24 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	
 	@Override
 	public void beginContact(Contact contact) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void preSolve(Contact contact, Manifold oldManifold) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void endContact(Contact contact) {
-		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void postSolve(Contact contact, ContactImpulse impulse) {
-		// TODO Auto-generated method stub
-		
+		//make the player jump when it lands on a platform
+		if(contact.getFixtureA() == fixture || contact.getFixtureB() == fixture)
+			if(contact.getWorldManifold().getPoints()[0].y <= body.getPosition().y - height / 2)
+				body.applyLinearImpulse(0, jumpPower , body.getWorldCenter().x, body.getWorldCenter().y, true);
 	}	
 }
