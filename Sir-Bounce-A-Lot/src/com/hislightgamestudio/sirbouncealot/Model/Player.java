@@ -47,9 +47,12 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	public void Update(){
 		body.applyForceToCenter(velocity, true);
 	}
+	
 	@Override
 	public boolean shouldCollide(Fixture fixtureA, Fixture fixtureB) {
-		// TODO Auto-generated method stub
+		if(fixtureA == fixture || fixtureB == fixture)
+			return (body.getLinearVelocity().y < 0);
+		
 		return false;
 	}
 	
@@ -58,15 +61,15 @@ public class Player extends InputController implements ContactFilter, ContactLis
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void endContact(Contact contact) {
+	public void preSolve(Contact contact, Manifold oldManifold) {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void preSolve(Contact contact, Manifold oldManifold) {
+	public void endContact(Contact contact) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -75,9 +78,5 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	public void postSolve(Contact contact, ContactImpulse impulse) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	
-	
-	
+	}	
 }
