@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class Levels extends AbstractScreen {
+public class Levels extends MenuAbstractScreen {
 	
 	@Override
 	public void render(float delta) {

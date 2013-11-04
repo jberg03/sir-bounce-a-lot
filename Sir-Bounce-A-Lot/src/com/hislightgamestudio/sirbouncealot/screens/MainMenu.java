@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hislightgamestudio.sirbouncealot.SirBounceALot;
 
-public class MainMenu extends AbstractScreen {
+public class MainMenu extends MenuAbstractScreen {
 
 	@Override
 	public void render(float delta) {

@@ -3,24 +3,21 @@ package com.hislightgamestudio.sirbouncealot.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
-public abstract class AbstractScreen implements Screen{
-	protected SpriteBatch batch;
+public abstract class MenuAbstractScreen implements Screen{
 	protected Stage stage;
 	protected TextureAtlas atlas;
 	protected Skin menuSkin;
 	protected Table table;
 	
-	AbstractScreen(){
-		batch = new SpriteBatch();
+	MenuAbstractScreen(){
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
-		atlas = new TextureAtlas("spritesheets/atlas.pack");
-		menuSkin = new Skin(Gdx.files.internal("uiskin/menuSkin.json"), atlas);
+		atlas = new TextureAtlas("Menu/menuAtlas.pack");
+		menuSkin = new Skin(Gdx.files.internal("Menu/menuSkin.json"), atlas);
 		table = new Table(menuSkin);
 		table.setFillParent(true);
 		
@@ -63,8 +60,8 @@ public abstract class AbstractScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		batch.dispose();
 		stage.dispose();
 		menuSkin.dispose();
+		atlas.dispose();
 	}
 }

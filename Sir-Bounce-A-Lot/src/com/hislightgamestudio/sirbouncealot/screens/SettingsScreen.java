@@ -15,7 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
-public class SettingsScreen extends AbstractScreen {
+public class SettingsScreen extends MenuAbstractScreen {
 
 	public static FileHandle levelDirectory(){
 		String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("leveldirectory").trim();

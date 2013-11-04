@@ -1,5 +1,6 @@
 package com.hislightgamestudio.sirbouncealot.Model;
 
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -78,5 +79,43 @@ public class Player extends InputController implements ContactFilter, ContactLis
 		if(contact.getFixtureA() == fixture || contact.getFixtureB() == fixture)
 			if(contact.getWorldManifold().getPoints()[0].y <= body.getPosition().y - height / 2)
 				body.applyLinearImpulse(0, jumpPower , body.getWorldCenter().x, body.getWorldCenter().y, true);
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		switch(keycode){
+		case Keys.A:
+			velocity.x = -movementForce;
+			break;
+		case Keys.D:
+			velocity.x = movementForce;
+			break;
+		default:
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		if(keycode == Keys.A || keycode == Keys.D)
+			velocity.x = 0;
+		return true;
 	}	
+	
+	public float getRestitution(){
+		return fixture.getRestitution();
+	}
+	
+	public void setRestituion(float restitution){
+		fixture.setRestitution(restitution);
+	}
+	
+	public Body getBody(){
+		return body;
+	}
+	
+	public Fixture getFixture(){
+		return fixture;
+	}
 }

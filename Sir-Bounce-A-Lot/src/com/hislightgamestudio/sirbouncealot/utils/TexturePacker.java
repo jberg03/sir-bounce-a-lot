@@ -20,7 +20,7 @@ public class TexturePacker {
 		settings.paddingX = 0;
 		settings.paddingY = 0;
 		
-		TexturePacker2.process(settings, "C:/Users/John/Documents/Sir Bounce-A-Lot/input",
-				"C:/Users/John/Documents/Sir Bounce-A-Lot/spritesheets", "menuAtlas.pack");
+		TexturePacker2.process(settings, "C:/Users/John/Documents/Sir Bounce-A-Lot/input/Game",
+				"C:/Users/John/Documents/Sir Bounce-A-Lot/spritesheets", "GameAtlas.pack");
 	}
 }
