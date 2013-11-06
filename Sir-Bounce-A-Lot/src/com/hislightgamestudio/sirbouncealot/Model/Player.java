@@ -1,6 +1,8 @@
 package com.hislightgamestudio.sirbouncealot.Model;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -20,9 +22,11 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	private Body body;
 	private Fixture fixture;
 	public final float width, height;
-	private float movementForce = 500;
+	private float movementForce = 350;
 	private Vector2 velocity = new Vector2();
-	private float jumpPower = 45;
+	private float jumpPower = 19f;
+	private Sprite sirBounceALot;
+	private TextureAtlas atlas;
 	
 	public Player(World world, float x, float y, float width){
 		this.width = width;
@@ -34,16 +38,26 @@ public class Player extends InputController implements ContactFilter, ContactLis
 		bodyDef.position.set(x, y);
 		
 		CircleShape shape = new CircleShape();
+		shape.setPosition(new Vector2(x, y));
 		shape.setRadius(width / 2);
 		
 		FixtureDef fixtureDef = new FixtureDef();
-		fixtureDef.density = 3;
 		fixtureDef.shape = shape;
-		fixtureDef.restitution = 0;
+		fixtureDef.density = 3f;
+		fixtureDef.restitution = 0f;
 		fixtureDef.friction = 0.8f;
 		
 		body = world.createBody(bodyDef);
 		fixture = body.createFixture(fixtureDef);
+		
+		atlas = new TextureAtlas("Game/GameAtlas.pack");
+		sirBounceALot = atlas.createSprite("SirBounce_A_Lot");
+		sirBounceALot.setSize(width, height);
+		sirBounceALot.setOrigin(x, y);
+		
+		body.setUserData(sirBounceALot);
+		
+		shape.dispose();
 	}
 	
 	public void Update(){
@@ -52,8 +66,9 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	
 	@Override
 	public boolean shouldCollide(Fixture fixtureA, Fixture fixtureB) {
-		if(fixtureA == fixture || fixtureB == fixture)
+		if(fixtureA == fixture || fixtureB == fixture){
 			return (body.getLinearVelocity().y < 0);
+		}
 		
 		return false;
 	}
@@ -69,17 +84,21 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	}
 	
 	@Override
+	public void postSolve(Contact contact, ContactImpulse impulse) {
+		//make the player jump when it lands on a platform
+		if(contact.getFixtureA() == fixture || contact.getFixtureB() == fixture){
+			if(contact.getWorldManifold().getPoints()[0].y <= body.getPosition().y){
+				body.applyLinearImpulse(0, jumpPower, body.getWorldCenter().x, body.getWorldCenter().y, true);
+			}
+		}	
+	}
+	
+	@Override
 	public void endContact(Contact contact) {
 		
 	}
 	
-	@Override
-	public void postSolve(Contact contact, ContactImpulse impulse) {
-		//make the player jump when it lands on a platform
-		if(contact.getFixtureA() == fixture || contact.getFixtureB() == fixture)
-			if(contact.getWorldManifold().getPoints()[0].y <= body.getPosition().y - height / 2)
-				body.applyLinearImpulse(0, jumpPower , body.getWorldCenter().x, body.getWorldCenter().y, true);
-	}
+	
 
 	@Override
 	public boolean keyDown(int keycode) {
@@ -117,5 +136,10 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	
 	public Fixture getFixture(){
 		return fixture;
+	}
+	
+	public void dispose(){
+		atlas.dispose();
+		sirBounceALot.getTexture().dispose();
 	}
 }
