@@ -58,7 +58,7 @@ public class Play implements Screen{
 	private Array<Body> bodies = new Array<Body>();
 	private TextureAtlas atlas;
 	private Sprite groundSprite;
-	private Sprite[] groundSpriteArray = new Sprite[45];
+	private Sprite[] groundSpriteArray = new Sprite[34];
 	
 	private Vector3 downLeft, downRight;
 	
@@ -88,8 +88,8 @@ public class Play implements Screen{
 	
 		
 		for(int i = 0; i < groundSpriteArray.length; i++){
+			groundSpriteArray[i].setPosition(downLeft.x + i * 1.5f, downLeft.y - 1);
 			groundSpriteArray[i].draw(batch);
-			groundSpriteArray[i].setPosition(i * 1.5f, downLeft.y - groundSprite.getHeight());
 		}
 
 		batch.end();
@@ -113,7 +113,7 @@ public class Play implements Screen{
 	public void show() {
 		batch = new SpriteBatch();
 		world = new World(new Vector2(0.0f, -9.81f), true);
-		debugRenderer = new Box2DDebugRenderer();
+		//debugRenderer = new Box2DDebugRenderer();
 
 		camera = new OrthographicCamera(Gdx.graphics.getWidth() / 25, Gdx.graphics.getHeight() / 25);
 
@@ -150,7 +150,7 @@ public class Play implements Screen{
 		//ground shape
 		ChainShape groundShape = new ChainShape();
 		//create a chain shape for the ground
-		downLeft = new Vector3(0, Gdx.graphics.getHeight(), 0);
+		downLeft = new Vector3(0, Gdx.graphics.getHeight() - 16, 0);
 		downRight = new Vector3(Gdx.graphics.getWidth(), downLeft.y, 0);
 		camera.unproject(downLeft);
 		camera.unproject(downRight);
@@ -165,6 +165,7 @@ public class Play implements Screen{
 		ground.createFixture(fixtureDef);
 		
 		atlas = new TextureAtlas("Game/GameAtlas.pack");
+		groundSprite = new Sprite();
 		groundSprite = atlas.createSprite("Level1_platform");
 		
 		for(int i = 0; i < groundSpriteArray.length; i++){
@@ -197,7 +198,7 @@ public class Play implements Screen{
 	@Override
 	public void dispose() {
 		world.dispose();
-		debugRenderer.dispose();
+		//debugRenderer.dispose();
 		atlas.dispose();
 		groundSprite.getTexture().dispose();
 		for(int i = 0; i < groundSpriteArray.length; i++)
