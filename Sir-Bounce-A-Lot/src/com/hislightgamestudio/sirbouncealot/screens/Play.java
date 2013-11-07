@@ -40,7 +40,7 @@ public class Play implements Screen{
 	private Array<Body> bodies = new Array<Body>();
 	private TextureAtlas atlas;
 	private Sprite groundSprite;
-	private Sprite[] groundSpriteArray;
+	private Sprite[] groundSpriteArray = new Sprite[45];
 	
 	private Vector3 downLeft, downRight;
 	
@@ -69,8 +69,9 @@ public class Play implements Screen{
 		}
 	
 		
-		for(int i = 0; i < groundSpriteArray.length; i++)
+		for(int i = 0; i < groundSpriteArray.length; i++){
 			groundSpriteArray[i].draw(batch);
+		}
 
 		batch.end();
 		
@@ -145,9 +146,10 @@ public class Play implements Screen{
 		ground.createFixture(fixtureDef);
 		
 		atlas = new TextureAtlas("Game/GameAtlas.pack");
+		groundSprite = atlas.createSprite("Level1_platform");
 		
-		for(int i = 0; i < Gdx.graphics.getWidth() / groundSprite.getWidth(); i++){
-			groundSpriteArray[i].set(atlas.createSprite("Level1_platform")); 
+		for(int i = 0; i < 45; i++){
+			groundSpriteArray[i] = groundSprite; 
 			groundSpriteArray[i].setSize(player.width * 1.5f, player.height);
 			groundSpriteArray[i].setOrigin(groundSprite.getWidth() / 2, groundSprite.getHeight() / 2);
 			groundSprite.setPosition(i * (player.width * 1.5f), downLeft.y - groundSprite.getHeight());
@@ -179,5 +181,9 @@ public class Play implements Screen{
 	public void dispose() {
 		world.dispose();
 		debugRenderer.dispose();
+		atlas.dispose();
+		groundSprite.getTexture().dispose();
+		for(int i = 0; i < groundSpriteArray.length; i++)
+			groundSpriteArray[i] = null;
 	}	
 }

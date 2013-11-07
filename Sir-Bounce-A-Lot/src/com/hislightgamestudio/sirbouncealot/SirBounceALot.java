@@ -5,7 +5,7 @@ import com.hislightgamestudio.sirbouncealot.screens.SplashScreen;
 
 public class SirBounceALot extends Game {
 	public static final String TITLE = "Sir Bounce-A-Lot";
-	public static final String VERSION = "v.0.0.1";
+	public static final String VERSION = "v.0.0.3";
 	
 	@Override
 	public void create() {		
