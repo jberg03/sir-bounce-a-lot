@@ -22,7 +22,7 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	private Body body;
 	private Fixture fixture;
 	public final float width, height;
-	private float movementForce = 350;
+	private float movementForce = 100;
 	private Vector2 velocity = new Vector2();
 	private float jumpPower = 19f;
 	private Sprite sirBounceALot;

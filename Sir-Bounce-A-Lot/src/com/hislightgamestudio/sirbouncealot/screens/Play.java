@@ -1,7 +1,5 @@
 package com.hislightgamestudio.sirbouncealot.screens;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -71,6 +69,7 @@ public class Play implements Screen{
 		
 		for(int i = 0; i < groundSpriteArray.length; i++){
 			groundSpriteArray[i].draw(batch);
+			groundSpriteArray[i].setPosition(i * 1.5f, downLeft.y - groundSprite.getHeight());
 		}
 
 		batch.end();
@@ -148,11 +147,9 @@ public class Play implements Screen{
 		atlas = new TextureAtlas("Game/GameAtlas.pack");
 		groundSprite = atlas.createSprite("Level1_platform");
 		
-		for(int i = 0; i < 45; i++){
+		for(int i = 0; i < groundSpriteArray.length; i++){
 			groundSpriteArray[i] = groundSprite; 
 			groundSpriteArray[i].setSize(player.width * 1.5f, player.height);
-			groundSpriteArray[i].setOrigin(groundSprite.getWidth() / 2, groundSprite.getHeight() / 2);
-			groundSprite.setPosition(i * (player.width * 1.5f), downLeft.y - groundSprite.getHeight());
 		}
 		groundShape.dispose();
 		
