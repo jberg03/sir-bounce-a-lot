@@ -4,9 +4,9 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import com.hislightgamestudio.sirbouncealot.SirBounceALot;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
@@ -14,9 +14,20 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.hislightgamestudio.sirbouncealot.SirBounceALot;
+import com.hislightgamestudio.sirbouncealot.control.InputController;
 
 public class SettingsScreen extends MenuAbstractScreen {
-
+	private Screen screen;
+	
+	public SettingsScreen(){
+		
+	}
+	
+	public SettingsScreen(Screen screen){
+		this.screen =  screen;
+	}
+	
 	public static FileHandle levelDirectory(){
 		String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("leveldirectory").trim();
 		if(prefsDir != null && !prefsDir.equals(""))
@@ -76,7 +87,11 @@ public class SettingsScreen extends MenuAbstractScreen {
 
 						@Override
 						public void run() {
-							((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+							if(InputController.playing){
+								((Game) Gdx.app.getApplicationListener()).setScreen(screen);
+							}else{
+								((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+							}
 						}
 					})));
 				}

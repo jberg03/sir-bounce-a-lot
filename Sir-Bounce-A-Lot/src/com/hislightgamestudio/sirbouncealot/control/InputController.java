@@ -3,7 +3,8 @@ package com.hislightgamestudio.sirbouncealot.control;
 import com.badlogic.gdx.InputProcessor;
 
 public class InputController implements InputProcessor {
-
+	public static boolean playing = false;
+	
 	@Override
 	public boolean keyDown(int keycode) {
 		// TODO Auto-generated method stub

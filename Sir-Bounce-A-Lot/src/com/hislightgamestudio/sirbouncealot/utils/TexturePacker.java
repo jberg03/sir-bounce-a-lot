@@ -15,12 +15,12 @@ public class TexturePacker {
 	public static void main(String[] args){
 		Settings settings = new Settings();
 		settings.pot = false;
-		settings.maxHeight = 65;
-		settings.maxWidth = 64;
+		settings.maxHeight = 512;
+		settings.maxWidth = 512;
 		settings.paddingX = 0;
 		settings.paddingY = 0;
 		
-		TexturePacker2.process(settings, "C:/Users/John/Documents/Sir Bounce-A-Lot/input/Game",
-				"C:/Users/John/Documents/Sir Bounce-A-Lot/spritesheets", "GameAtlas.pack");
+		TexturePacker2.process(settings, "C:/Users/John/Documents/Sir Bounce-A-Lot/input/Menu",
+				"C:/Users/John/Documents/Sir Bounce-A-Lot/spritesheets", "menuAtlas.pack");
 	}
 }
