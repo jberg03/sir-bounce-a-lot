@@ -24,8 +24,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -36,36 +34,44 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.hislightgamestudio.sirbouncealot.Model.Player;
 import com.hislightgamestudio.sirbouncealot.control.InputController;
+//import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 
-public class Play implements Screen{
+public class Play extends AbstractGameScreen{
 	private final float TIMESTEP = 1 / 45f;
 	private final int VELOCITYITERATIONS = 8;
 	private final int POSITIONITERATIONS = 3;
 	
 	private World world;
-	private Box2DDebugRenderer debugRenderer;
+	//private Box2DDebugRenderer debugRenderer;
 	private OrthographicCamera camera;
+	
+	private InputMultiplexer inputMulti;
 	
 	private Player player;
 	private SpriteBatch batch;
 	private Array<Body> bodies = new Array<Body>();
-	private TextureAtlas atlas;
+	private TextureAtlas gameAtlas;
 	private Sprite groundSprite;
 	private Sprite[] groundSpriteArray = new Sprite[34];
+	
+	private Window pause;
+	private boolean visible = false;
 	
 	private Vector3 downLeft, downRight;
 	
 	@Override
 	public void render(float delta) {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		super.render(delta);
 		
 		//debugRenderer.render(world, camera.combined);
 		
@@ -103,9 +109,12 @@ public class Play implements Screen{
 											player.getBody().getAngle());
 		
 		player.Update();
+		
+		pause.setVisible(visible);		
 	}
 	@Override
 	public void resize(int width, int height) {
+		super.resize(width, height);
 		camera.viewportWidth = width / 25;
 		camera.viewportHeight = height / 25;
 	}
@@ -119,18 +128,68 @@ public class Play implements Screen{
 
 		BodyDef bodyDef = new BodyDef();
 		FixtureDef fixtureDef = new FixtureDef();
-
+		
 		//Player
 		player = new Player(world, 0, 0, 1);
 		world.setContactFilter(player);
 		world.setContactListener(player);
+		
+		//Pause Menu
+		pause = new Window("PAUSE", menuSkin);
+		pause.setMovable(false);
+		
+		//create the resume button
+		TextButton resume = new TextButton("RESUME", menuSkin);
+		resume.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y){
+				visible = false;
+				Gdx.input.setInputProcessor(inputMulti);
+			}
+		});
+		resume.pad(5f);
 
-		Gdx.input.setInputProcessor(new InputMultiplexer(new InputController(){
+		//create the settings button
+		TextButton settings = new TextButton("SETTINGS", menuSkin);
+		settings.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y){
+				((Game) Gdx.app.getApplicationListener()).setScreen(new SettingsScreen());
+			}
+		});
+		settings.pad(5f);
+
+		//creating exit button		
+		TextButton exit = new TextButton("EXIT", menuSkin);
+		exit.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());							
+			}
+		});
+		exit.pad(5f);
+
+
+		pause.pad(64);
+		pause.add(resume).row();
+		pause.add(settings).row();
+		pause.add(exit);
+		pause.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+		pause.setPosition(Gdx.graphics.getWidth() / 2 - pause.getWidth() / 2, Gdx.graphics.getHeight() / 2 - pause.getHeight() / 2);
+
+		stage.addActor(pause);
+		
+		Gdx.input.setInputProcessor(inputMulti = new InputMultiplexer(new InputController(){
 			@Override
 			public boolean keyDown(int keycode) {
 				switch(keycode){
 				case Keys.ESCAPE:
+					InputController.playing = false;
 					((Game)Gdx.app.getApplicationListener()).setScreen(new Levels());
+					break;
+				case Keys.ENTER:
+					visible = true;
+					Gdx.input.setInputProcessor(stage);					
 					break;
 				}					
 				return false;
@@ -141,7 +200,7 @@ public class Play implements Screen{
 				return true;
 			}
 		}, player));
-
+		
 		// ground
 		//body definition
 		bodyDef.type = BodyType.StaticBody;
@@ -164,9 +223,9 @@ public class Play implements Screen{
 		Body ground = world.createBody(bodyDef);
 		ground.createFixture(fixtureDef);
 		
-		atlas = new TextureAtlas("Game/GameAtlas.pack");
+		gameAtlas = new TextureAtlas("Game/GameAtlas.pack");
 		groundSprite = new Sprite();
-		groundSprite = atlas.createSprite("Level1_platform");
+		groundSprite = gameAtlas.createSprite("Level1_platform");
 		
 		for(int i = 0; i < groundSpriteArray.length; i++){
 			groundSpriteArray[i] = groundSprite; 
@@ -179,27 +238,30 @@ public class Play implements Screen{
 					player.height, player.width * 1.5f, player.width * 3.5f, player.width / 3,
 					20 * MathUtils.degRad);*/
 	}
-
+	
 	@Override
 	public void hide() {
-		dispose();
+		if(InputController.playing == false){
+			super.dispose();
+			dispose();
+		}
 	}
 
 	@Override
 	public void pause() {
-
+		super.resume();
 	}
 
 	@Override
 	public void resume() {
-
+		super.resume();
 	}
 
 	@Override
 	public void dispose() {
 		world.dispose();
 		//debugRenderer.dispose();
-		atlas.dispose();
+		gameAtlas.dispose();
 		groundSprite.getTexture().dispose();
 		for(int i = 0; i < groundSpriteArray.length; i++)
 			groundSpriteArray[i] = null;

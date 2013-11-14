@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.hislightgamestudio.sirbouncealot.control.InputController;
 
 public class Levels extends MenuAbstractScreen {
 	
@@ -32,9 +33,10 @@ public class Levels extends MenuAbstractScreen {
 		ScrollPane scrollPane = new ScrollPane(list, menuSkin);
 		
 		TextButton play = new TextButton("PLAY", menuSkin, "big");
-		play.addListener(new ClickListener(){
+		play.addListener(new ClickListener(){			
 			@Override
 			public void clicked(InputEvent event, float x, float y){
+				InputController.playing = true;
 				((Game)Gdx.app.getApplicationListener()).setScreen(new Play());
 			}
 		});

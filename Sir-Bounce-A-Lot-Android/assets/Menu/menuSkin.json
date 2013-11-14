@@ -36,5 +36,8 @@
 	},
 	"com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle": {
 		"default": { "font": black32, "fontColor": black, "messageFontColor": gray, "background": scrollBackground, "cursor": selection }
+	},
+	"com.badlogic.gdx.scenes.scene2d.ui.Window$WindowStyle": {
+		"default": { "titleFont": "black64", "background": "pauseBackground", "stageBackground": "windowBackground"}
 	}	
 }
