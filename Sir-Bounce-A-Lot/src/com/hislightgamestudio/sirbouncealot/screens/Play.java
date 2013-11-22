@@ -134,50 +134,7 @@ public class Play extends AbstractGameScreen{
 		world.setContactFilter(player);
 		world.setContactListener(player);
 		
-		//Pause Menu
-		pause = new Window("PAUSE", menuSkin);
-		pause.setMovable(false);
-		
-		//create the resume button
-		TextButton resume = new TextButton("RESUME", menuSkin);
-		resume.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y){
-				visible = false;
-				Gdx.input.setInputProcessor(inputMulti);
-			}
-		});
-		resume.pad(5f);
-
-		//create the settings button
-		TextButton settings = new TextButton("SETTINGS", menuSkin);
-		settings.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y){
-				((Game) Gdx.app.getApplicationListener()).setScreen(new SettingsScreen());
-			}
-		});
-		settings.pad(5f);
-
-		//creating exit button		
-		TextButton exit = new TextButton("EXIT", menuSkin);
-		exit.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());							
-			}
-		});
-		exit.pad(5f);
-
-
-		pause.pad(64);
-		pause.add(resume).row();
-		pause.add(settings).row();
-		pause.add(exit);
-		pause.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-		pause.setPosition(Gdx.graphics.getWidth() / 2 - pause.getWidth() / 2, Gdx.graphics.getHeight() / 2 - pause.getHeight() / 2);
-
-		stage.addActor(pause);
+		pauseMenu();
 		
 		Gdx.input.setInputProcessor(inputMulti = new InputMultiplexer(new InputController(){
 			@Override
@@ -237,6 +194,53 @@ public class Play extends AbstractGameScreen{
 		/*generator = new LevelGenerator(ground, downLeft.x, downRight.x, player.width,
 					player.height, player.width * 1.5f, player.width * 3.5f, player.width / 3,
 					20 * MathUtils.degRad);*/
+	}
+	
+	private void pauseMenu(){
+		//Pause Menu
+				pause = new Window("PAUSE", menuSkin);
+				pause.setMovable(false);
+				
+				//create the resume button
+				TextButton resume = new TextButton("RESUME", menuSkin);
+				resume.addListener(new ClickListener(){
+					@Override
+					public void clicked(InputEvent event, float x, float y){
+						visible = false;
+						Gdx.input.setInputProcessor(inputMulti);
+					}
+				});
+				resume.pad(5f);
+
+				/*//create the settings button
+				TextButton settings = new TextButton("SETTINGS", menuSkin);
+				settings.addListener(new ClickListener(){
+					@Override
+					public void clicked(InputEvent event, float x, float y){
+						((Game) Gdx.app.getApplicationListener()).setScreen(new SettingsScreen());
+					}
+				});
+				settings.pad(5f);*/
+
+				//creating exit button		
+				TextButton exit = new TextButton("EXIT", menuSkin);
+				exit.addListener(new ClickListener(){
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu());							
+					}
+				});
+				exit.pad(5f);
+
+
+				pause.pad(64);
+				pause.add(resume).row();
+				pause.add().row();
+				pause.add(exit);
+				pause.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+				pause.setPosition(Gdx.graphics.getWidth() / 2 - pause.getWidth() / 2, Gdx.graphics.getHeight() / 2 - pause.getHeight() / 2);
+
+				stage.addActor(pause);
 	}
 	
 	@Override
