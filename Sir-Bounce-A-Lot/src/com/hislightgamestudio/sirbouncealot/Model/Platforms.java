@@ -1,5 +1,8 @@
 package com.hislightgamestudio.sirbouncealot.Model;
 
-public class Platforms {
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+public class Platforms {
+	public static float x, y;
+	public static float[] vertices;
 }
