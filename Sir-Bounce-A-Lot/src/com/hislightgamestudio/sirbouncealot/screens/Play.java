@@ -66,6 +66,7 @@ public class Play extends AbstractGameScreen{
 	
 	private Window pause;
 	private boolean visible = false;
+	private boolean updateable = true;
 	
 	private Vector3 downLeft, downRight;
 	
@@ -74,8 +75,8 @@ public class Play extends AbstractGameScreen{
 		super.render(delta);
 		
 		//debugRenderer.render(world, camera.combined);
-		
-		world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
+		if(updateable)
+			world.step(TIMESTEP, VELOCITYITERATIONS, POSITIONITERATIONS);
 		
 		camera.position.y = player.getBody().getPosition().y > camera.position.y ? player.getBody().getPosition().y : camera.position.y;
 		camera.update();
@@ -100,6 +101,7 @@ public class Play extends AbstractGameScreen{
 
 		batch.end();
 		
+		
 		//if player goes off screen on one side make them come back in on the other side
 		if(player.getBody().getPosition().x  < downLeft.x)
 			player.getBody().setTransform(downRight.x, player.getBody().getPosition().y, 
@@ -107,6 +109,7 @@ public class Play extends AbstractGameScreen{
 		if(player.getBody().getPosition().x  > downRight.x)
 			player.getBody().setTransform(downLeft.x, player.getBody().getPosition().y, 
 											player.getBody().getAngle());
+		
 		
 		player.Update();
 		
@@ -145,6 +148,7 @@ public class Play extends AbstractGameScreen{
 					((Game)Gdx.app.getApplicationListener()).setScreen(new Levels());
 					break;
 				case Keys.ENTER:
+					updateable = false;
 					visible = true;
 					Gdx.input.setInputProcessor(stage);					
 					break;
@@ -206,6 +210,7 @@ public class Play extends AbstractGameScreen{
 				resume.addListener(new ClickListener(){
 					@Override
 					public void clicked(InputEvent event, float x, float y){
+						updateable = true;
 						visible = false;
 						Gdx.input.setInputProcessor(inputMulti);
 					}
