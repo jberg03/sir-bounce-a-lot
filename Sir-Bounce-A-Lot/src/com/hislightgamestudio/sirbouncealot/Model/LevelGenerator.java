@@ -1,11 +1,16 @@
 package com.hislightgamestudio.sirbouncealot.Model;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.utils.Json;
 
 public class LevelGenerator {
 	private Body environment;
 	private float leftEdge, rightEdge;
+	private ArrayList<Platforms> platforms;
 	
 	public LevelGenerator(Body environment, float leftEdge, float rightEdge){
 		this.environment = environment;
@@ -14,11 +19,11 @@ public class LevelGenerator {
 	}
 	
 	public void generate(){
-		float width = 1.5f;
-		float height = 1.0f;
+		Json json = new Json();
+		LevelGenerator lg = json.fromJson(LevelGenerator.class, Gdx.files.internal("Levels/Level1.json"));
 		
 		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(width / 2, height / 2);
+		
 		
 		environment.createFixture(shape, 0);
 		
