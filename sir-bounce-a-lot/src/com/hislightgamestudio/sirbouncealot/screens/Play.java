@@ -62,7 +62,7 @@ public class Play extends AbstractGameScreen{
 	private Array<Body> bodies = new Array<Body>();
 	private TextureAtlas gameAtlas;
 	private Sprite groundSprite;
-	private Sprite[] groundSpriteArray = new Sprite[34];
+	private Sprite[] groundSpriteArray = new Sprite[50];
 	
 	private Window pause;
 	private boolean visible = false;
@@ -184,7 +184,7 @@ public class Play extends AbstractGameScreen{
 		Body ground = world.createBody(bodyDef);
 		ground.createFixture(fixtureDef);
 		
-		gameAtlas = new TextureAtlas("Game/GameAtlas.pack");
+		gameAtlas = new TextureAtlas("game/gameAtlas.pack");
 		groundSprite = new Sprite();
 		groundSprite = gameAtlas.createSprite("Level1_platform");
 		

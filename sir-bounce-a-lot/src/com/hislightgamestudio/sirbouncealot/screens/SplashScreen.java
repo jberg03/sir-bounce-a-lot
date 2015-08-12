@@ -32,7 +32,7 @@ public class SplashScreen extends MenuAbstractScreen{
 		//set preferences
 		Gdx.graphics.setVSync(SettingsScreen.vSync());
 		
-		splashTexture = new Texture("data/His Light Game Studio Logo(2).jpg");
+		splashTexture = new Texture("data/his Light Game Studio Logo.jpg");
 		splash = new Image(splashTexture);
 		splash.setX(Gdx.graphics.getWidth() / 2 - splashTexture.getWidth() / 2);
 		splash.setY(Gdx.graphics.getHeight() / 2 - splashTexture.getHeight() / 2);

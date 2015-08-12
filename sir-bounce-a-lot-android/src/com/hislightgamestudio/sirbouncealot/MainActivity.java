@@ -15,7 +15,7 @@ public class MainActivity extends AndroidApplication {
         cfg.useAccelerometer = false;
         cfg.useCompass = false;
         cfg.useWakelock = true;
-        cfg.useGLSurfaceViewAPI18 = true;
+        cfg.hideStatusBar = true;
         
         initialize(new SirBounceALot(), cfg);
     }

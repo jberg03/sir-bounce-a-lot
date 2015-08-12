@@ -4,6 +4,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -18,11 +19,17 @@ import com.hislightgamestudio.sirbouncealot.SirBounceALot;
 public class SettingsScreen extends MenuAbstractScreen {        
         
         public static FileHandle levelDirectory(){
-                String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("leveldirectory").trim();
-                if(prefsDir != null && !prefsDir.equals(""))
-                        return Gdx.files.absolute(prefsDir);
-                else
-                        return Gdx.files.absolute(Gdx.files.external(SirBounceALot.TITLE + "/levels").path());
+            String levelPrefs;
+
+            if(Gdx.app.getType() == Application.ApplicationType.Android) {
+                levelPrefs = "levels";
+            }else
+                levelPrefs = "/levels";
+            String prefsDir = Gdx.app.getPreferences(SirBounceALot.TITLE).getString("leveldirectory").trim();
+            if(prefsDir != null && !prefsDir.equals(""))
+                return Gdx.files.absolute(prefsDir);
+            else
+                return Gdx.files.absolute(Gdx.files.external(SirBounceALot.TITLE + levelPrefs).path());
         }
 
         public static boolean vSync(){
