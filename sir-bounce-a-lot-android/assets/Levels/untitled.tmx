@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="90" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="gameAtlas" tilewidth="16" tileheight="16">
+  <image source="../game/gameAtlas.png" width="48" height="32"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="40" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2sEJwCAMAEAf7j9zJxC0xJqaOxCKjyLRRAVbo6r+UYPM+uA7ou9Nf1Z/Gy+wh70f4smneRXisboWbjlrkpeaVFPFebcH7yWeZzlnApHcX1lhvUAt0Tke8R+1B2rLlPfOREB2We5vWcZRmbjDvdRYRrxdg1iz76xPtQc5hwLh
+  </data>
+ </layer>
+</map>

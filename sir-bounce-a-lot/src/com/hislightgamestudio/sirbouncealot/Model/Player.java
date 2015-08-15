@@ -42,9 +42,9 @@ public class Player extends InputController implements ContactFilter, ContactLis
 	private Body body;
 	private Fixture fixture;
 	public final float width, height;
-	private float movementForce = 30;
+	private float movementForce = 20;
 	private Vector2 velocity = new Vector2();
-	private float jumpPower = 19f;
+	private float jumpPower = 10f;
 	private Sprite sirBounceALot;
 	private TextureAtlas atlas;
 	
@@ -168,6 +168,13 @@ public class Player extends InputController implements ContactFilter, ContactLis
             velocity.x = 0;
 
         return false;
+    }
+
+    public float getJumpPower(){
+        return jumpPower;
+    }
+    public void setJumpPower(float jump){
+        this.jumpPower = jump;
     }
 
 	public float getRestitution(){
