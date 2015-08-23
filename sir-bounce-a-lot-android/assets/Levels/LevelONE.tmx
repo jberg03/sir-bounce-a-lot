@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="90" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="gameAtlas" tilewidth="16" tileheight="16">
+  <image source="../game/gameAtlas.png" width="48" height="32"/>
+  <tile id="3">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="TileLayer1" width="40" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2sEJwCAMAEAf7j9zJxC0xJqaOxCKjyLRRAVbo6r+UYPM+uA7ou9Nf1Z/Gy+wh70f4smneRXisboWbjlrkpeaVFPFebcH7yWeZzlnApHcX1lhvUAt0Tke8R+1B2rLlPfOREB2We5vWcZRmbjDvdRYRrxdg1iz76xPtQc5hwLh
+  </data>
+ </layer>
+ <objectgroup name="PhysicsLayer" width="40" height="90">
+  <object name="platform" x="0" y="1425">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 639,1"/>
+  </object>
+  <object name="platform2" x="560" y="1329">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 -126,1"/>
+  </object>
+  <object name="platform3" x="193" y="1281">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 111,0"/>
+  </object>
+  <object name="platform4" x="64" y="1185">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 63,0"/>
+  </object>
+  <object name="platform5" x="433" y="1137">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 99,0"/>
+  </object>
+  <object name="platform6" x="529" y="1121">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 110,0"/>
+  </object>
+  <object name="platform7" x="322" y="1009">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 -80,0"/>
+  </object>
+  <object name="platform8" x="335" y="993">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 -14,0"/>
+  </object>
+  <object name="platform9" x="49" y="897">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 62,0"/>
+  </object>
+  <object name="platform10" x="97" y="881">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 46,1"/>
+  </object>
+  <object name="platform11" x="417" y="881">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform12" x="529" y="769">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 110,1"/>
+  </object>
+  <object name="platform13" x="209" y="721">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 110,0"/>
+  </object>
+  <object name="platform14" x="0" y="577">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 15,0"/>
+  </object>
+  <object name="platform15" x="257" y="609">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 93,0"/>
+  </object>
+  <object name="platform16" x="513" y="529">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 78,0"/>
+  </object>
+  <object name="platform17" x="177" y="513">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 61,0"/>
+  </object>
+  <object name="platform18" x="82" y="465">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 61,1"/>
+  </object>
+  <object name="platform19" x="1" y="401">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 110,0"/>
+  </object>
+  <object name="platform20" x="194" y="401">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 13,0"/>
+  </object>
+  <object name="platform21" x="289" y="401">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform22" x="369" y="369">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform23" x="574" y="337">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 -125,0"/>
+  </object>
+  <object name="platform24" x="225" y="257">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 157,0"/>
+  </object>
+  <object name="platform25" x="17" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform26" x="65" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 13,0"/>
+  </object>
+  <object name="platform27" x="145" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform28" x="225" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform29" x="305" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform30" x="401" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform31" x="497" y="129">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 14,0"/>
+  </object>
+  <object name="platform32" x="560" y="145">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 15,0"/>
+  </object>
+  <object name="platform33" x="113" y="49">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 414,1"/>
+  </object>
+ </objectgroup>
+</map>

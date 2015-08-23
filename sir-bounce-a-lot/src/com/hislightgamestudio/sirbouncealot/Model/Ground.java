@@ -43,7 +43,7 @@ public class Ground {
         Body ground = world.createBody(bodyDef);
         ground.createFixture(fixtureDef);
 
-        for(int i = 0; i < groundSpriteArray.length; i++){
+        for (int i = 0; i < groundSpriteArray.length; i++) {
             groundSpriteArray[i] = groundSprite;
             groundSpriteArray[i].setSize(width, height);
         }
@@ -51,14 +51,14 @@ public class Ground {
         shape.dispose();
     }
 
-    public void dispose(){
+    public void dispose() {
         atlas.dispose();
         groundSprite.getTexture().dispose();
-        for(int i = 0; i < groundSpriteArray.length; i++)
+        for (int i = 0; i < groundSpriteArray.length; i++)
             groundSpriteArray[i] = null;
     }
 
-    public Sprite[] getGroundSpriteArray(){
+    public Sprite[] getGroundSpriteArray() {
         return groundSpriteArray;
     }
 }

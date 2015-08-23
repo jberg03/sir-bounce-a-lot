@@ -1,9 +1,11 @@
-/************************************************************************************
-* Author: John Berg
-* Date: 8/13/13
-* Purpose: Uses libgdx's Texture packer to take images from input folder and creates
-* a sprite sheet and .pack file in the Output file
-************************************************************************************/
+/**
+ * *********************************************************************************
+ * Author: John Berg
+ * Date: 8/13/13
+ * Purpose: Uses libgdx's Texture packer to take images from input folder and creates
+ * a sprite sheet and .pack file in the Output file
+ * **********************************************************************************
+ */
 /*
 package com.hislightgamestudio.sirbouncealot.utils;
 
