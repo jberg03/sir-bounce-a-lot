@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="90" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="map" tilewidth="16" tileheight="16">
+  <image source="../game/gameAtlas.png" width="48" height="32"/>
+  <tile id="3">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="40" height="90">
+  <data encoding="base64" compression="zlib">
+   eJzt2bsKgDAQRUEL//+bJa1F1gdmLzgDW3tggwrZNgAAkuyT6VR1dDdeeXZX353ndu+5ou8dfc91v2MqyW1Dcl/qblO+v2epXUN6V3JbouS2YfbPXA1rvdnVigEAAAAAAAD+o/t+0v3lv3WfL+fvW937q+YAv6QDYQ==
+  </data>
+ </layer>
+ <objectgroup name="PhysicsLayer" width="40" height="90">
+  <object name="platform" x="1" y="1314">
+   <properties>
+    <property name="material" value="metal"/>
+   </properties>
+   <polyline points="0,0 638,0"/>
+  </object>
+ </objectgroup>
+</map>
