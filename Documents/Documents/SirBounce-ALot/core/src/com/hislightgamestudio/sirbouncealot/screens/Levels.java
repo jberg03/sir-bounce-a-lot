@@ -14,8 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.hislightgamestudio.sirbouncealot.control.InputController;
 
-public class Levels extends MenuAbstractScreen {
-    public static List list;
+public class Levels extends AbstractGameScreen {
+    static private List list;
 
     @Override
     public void render(float delta) {
@@ -70,6 +70,10 @@ public class Levels extends MenuAbstractScreen {
         stage.addActor(table);
 
         stage.addAction(sequence(moveTo(0, stage.getHeight()), moveTo(0, 0, .5f)));
+    }
+
+    public static List getLevel(){
+        return list;
     }
 
     @Override

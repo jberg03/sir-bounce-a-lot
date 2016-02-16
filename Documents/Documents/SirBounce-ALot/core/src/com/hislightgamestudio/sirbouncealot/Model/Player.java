@@ -76,7 +76,7 @@ public class Player extends InputController implements ContactFilter, ContactLis
         body = world.createBody(bodyDef);
         fixture = body.createFixture(fixtureDef);
 
-        Texture tex = new Texture("data/sirbouncealot114.png");
+        Texture tex = new Texture("data/sirbouncealot.png");
         sirBounceALot = new Sprite(tex);
         sirBounceALot.setSize(width, height);
         sirBounceALot.setOrigin(this.x, this.y);
